@@ -892,16 +892,16 @@ done_prefix:
 
 		if (ins.desc->require_0x66 && !ins.opsize_prefix)
 		{
-			log_error("Unknown opcode.\n");
+			log_error("Unknown opcode: %2x.\n", (int) ins.opcode);
 			__debugbreak();
 		}
 
 		/* Translate instruction */
 		switch (ins.desc->type)
 		{
-		case INST_TYPE_UNKNOWN: log_error("Unknown opcode.\n"); __debugbreak(); break;
-		case INST_TYPE_INVALID: log_error("Invalid opcode.\n"); __debugbreak(); break;
-		case INST_TYPE_UNSUPPORTED: log_error("Unsupported opcode.\n"); __debugbreak(); break;
+		case INST_TYPE_UNKNOWN: log_error("Unknown opcode: %2x.\n", (int) ins.opcode); __debugbreak(); break;
+		case INST_TYPE_INVALID: log_error("Invalid opcode: %2x.\n", (int) ins.opcode); __debugbreak(); break;
+		case INST_TYPE_UNSUPPORTED: log_error("Unsupported opcode: %2x.\n", (int) ins.opcode); __debugbreak(); break;
 
 		case INST_TYPE_EXTENSION:
 		{
@@ -913,7 +913,7 @@ done_prefix:
 		{
 			if (!ins.escape_0x0f)
 			{
-				log_error("Invalid opcode.\n");
+				log_error("Invalid opcode: %2x.\n", (int) ins.opcode);
 				__debugbreak();
 			}
 			if (ins.opsize_prefix)
